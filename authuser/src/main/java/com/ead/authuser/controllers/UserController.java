@@ -21,6 +21,9 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/users")
@@ -33,7 +36,14 @@ public class UserController {
     public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec spec,
             @PageableDefault(sort = "userId", direction = Sort.Direction.DESC)
             Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(spec, pageable));
+        Page<UserModel> userModelPage = userService.findAll(spec, pageable);
+        if (!userModelPage.isEmpty()) {
+            for (UserModel user : userModelPage.toList()) {
+                user.add(linkTo(methodOn(UserController.class).getOneUser(user.getUserId())).withSelfRel());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
 
     @GetMapping("/{userId}")
