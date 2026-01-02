@@ -32,7 +32,7 @@ public class CourseController {
     }
 
 
-    @GetMapping("{courseId}")
+    @GetMapping("/{courseId}")
     public ResponseEntity<Object> getOneCourse(@RequestParam UUID courseId) {
         var course = courseService.findById(courseId);
         if (course.isPresent()){
@@ -50,7 +50,7 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(courseModel));
     }
 
-    @DeleteMapping("{courseId}")
+    @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable UUID courseId) {
         Optional<CourseModel> courseModel = courseService.findById(courseId);
         if (courseModel.isPresent()) {
@@ -61,7 +61,7 @@ public class CourseController {
 
     }
 
-    @PutMapping("{courseId}")
+    @PutMapping("/{courseId}")
     public ResponseEntity<Object> updateCourse(@PathVariable UUID courseId, @RequestBody @Valid CourseDto courseDto) {
         Optional<CourseModel> courseModel = courseService.findById(courseId);
         if (courseModel.isPresent()) {
