@@ -1,4 +1,4 @@
-package com.ead.course.enums;
+package com.ead.authuser.enums;
 
 public enum CourseLevel {
     BEGINNER,
