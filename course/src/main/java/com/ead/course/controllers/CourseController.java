@@ -30,7 +30,7 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity<Page<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpec spec,
-                                                           @PageableDefault(direction = Sort.Direction.ASC) Pageable pageable,
+                                                           @PageableDefault(direction = Sort.Direction.ASC,sort = "courseId") Pageable pageable,
                                                            @RequestParam(required = false) UUID userId) {
         Page<CourseModel> allCourses;
 
