@@ -2,10 +2,10 @@ package com.ead.authuser.clients;
 
 import com.ead.authuser.dtos.CourseDto;
 import com.ead.authuser.dtos.ResponsePageDto;
-import com.ead.authuser.services.Impl.UtilsServiceImpl;
 import com.ead.authuser.services.UtilsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,18 +21,20 @@ import java.util.UUID;
 
 @Log4j2
 @Component
-public class UserClient {
+public class CourseClient {
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     @Autowired
     private UtilsService utilsService;
 
+    @Value("${ead.api.url.course}")
+    private String REQUEST_URI_COURSE;
+
     public Page<CourseDto> getAllCoursesByUsers(UUID userId, Pageable pageable) {
         List<CourseDto> searchResult = null;
-        String url = utilsService.createUrl(userId, pageable);
-        log.debug("Request URL: {} ", url);
+        String url = REQUEST_URI_COURSE + utilsService.createUrl(userId, pageable);
         log.info("Request URL: {} ", url);
         try{
             ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType =
