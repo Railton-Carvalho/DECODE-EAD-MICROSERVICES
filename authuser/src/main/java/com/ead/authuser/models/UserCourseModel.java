@@ -2,12 +2,16 @@ package com.ead.authuser.models;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "TB_USERS_COURSES")
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
