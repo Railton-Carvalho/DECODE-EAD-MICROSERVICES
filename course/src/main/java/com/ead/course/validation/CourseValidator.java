@@ -37,7 +37,6 @@ public class CourseValidator implements Validator {
         if (!errors.hasErrors()) {
             validateUserInstructor(courseDto.getUserInstructor(), errors);
         }
-
     }
 
     private void validateUserInstructor(UUID userInstructorId, Errors errors) {
