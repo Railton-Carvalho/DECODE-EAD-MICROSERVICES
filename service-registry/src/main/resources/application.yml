@@ -1,0 +1,10 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: ead-service-registry
+
+eureka:
+  client:
+    register-with-eureka: false #para ele n se registrar nele msm (no eureka)
+    fetch-registry: false # para esse micro n buscar um registro no eureka como os clientes váo fazer
