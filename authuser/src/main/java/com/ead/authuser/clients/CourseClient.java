@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,15 +42,14 @@ public class CourseClient {
                     new ParameterizedTypeReference<>() {};
 
             ResponseEntity<ResponsePageDto<CourseDto>> result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
-            searchResult = result.getBody().getContent();
-
-
-            log.debug("Response Number of Elements: {}", searchResult.size());
-
+            if (result.getBody() != null && result.getBody().getContent() != null) {
+                searchResult = result.getBody().getContent();
+                log.debug("Response Number of Elements: {}", searchResult.size());
+            }
         }catch (HttpStatusCodeException e){
             log.error("Error request /courses {}",e);
         }
         log.info("Ending request /courses userId {} ", userId);
-        return new PageImpl<>(searchResult);
+        return new PageImpl<>(searchResult != null ? searchResult : Collections.emptyList());
     }
 }
