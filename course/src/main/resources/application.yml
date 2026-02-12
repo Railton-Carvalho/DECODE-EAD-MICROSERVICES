@@ -1,9 +1,11 @@
 server:
   port: 8082
+  servlet:
+    context-path: '/ead-course/'
 
 spring:
   application:
-    name: course
+    name: ead-course-service
   datasource:
     url: jdbc:postgresql://localhost:5432/ead-course
     username: postgres
@@ -16,6 +18,19 @@ spring:
     properties:
       hibernate:
         show_sql: true
+logging:
+  level:
+    com.ead: TRACE
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
 ead:
   api:
-    authuser: 'http://localhost:8087'
+    authuser: 'http://ead-authuser-service/ead-authuser'
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
