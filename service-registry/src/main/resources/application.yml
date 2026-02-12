@@ -6,5 +6,5 @@ spring:
 
 eureka:
   client:
-    register-with-eureka: false #para ele n se registrar nele msm (no eureka)
-    fetch-registry: false # para esse micro n buscar um registro no eureka como os clientes váo fazer
+    register-with-eureka: false  # nao se registrar nele mesmo
+    fetch-registry: false        # clientes irao buscar o registro
