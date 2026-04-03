@@ -69,4 +69,13 @@ public class AuthUserClient extends RestTemplate {
         log.info("Response : {}", response);
 
     }
+
+    public void
+
+
+
+    deleteCourseInAuthUser(UUID courseId) {
+        String url = REQUEST_URI_AUTHUSER + "/users/courses/" + courseId;
+        restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
+    }
 }

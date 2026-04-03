@@ -74,5 +74,13 @@ public class CourseUserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course Not Found!");
     }
 
+    public ResponseEntity<Object> deleteCourseUserByUser(@PathVariable(value = "userId") UUID userId) {
+        if (!courseUserService.existsByUserId(userId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CourseUser Not Found!");
+        }
+        courseUserService.deleteCourseUserByUser(userId);
+        return ResponseEntity.status(HttpStatus.OK).body("CourseUser Deleted successfully!");
+    }
+
 
 }
